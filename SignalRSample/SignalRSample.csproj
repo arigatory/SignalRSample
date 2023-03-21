@@ -8,11 +8,26 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Documents\**" />
+    <Compile Remove="Snippets\**" />
+    <Content Remove="Documents\**" />
+    <Content Remove="Snippets\**" />
+    <EmbeddedResource Remove="Documents\**" />
+    <EmbeddedResource Remove="Snippets\**" />
+    <None Remove="Documents\**" />
+    <None Remove="Snippets\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="7.0.4" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="7.0.4" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="7.0.4" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.4" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\lib\microsoft\signalr\dist\browser\" />
   </ItemGroup>
 
 </Project>
