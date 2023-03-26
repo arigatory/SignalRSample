@@ -42,7 +42,7 @@ btn_ravenclaw.addEventListener("click", function (event) {
 })
 
 btn_slytherin.addEventListener("click", function (event) {
-    connectionHouse.send("JoinHouse", "Slytherin ");
+    connectionHouse.send("JoinHouse", "Slytherin");
     event.preventDefault();
 })
 
@@ -63,10 +63,91 @@ btn_un_ravenclaw.addEventListener("click", function (event) {
 })
 
 btn_un_slytherin.addEventListener("click", function (event) {
-    connectionHouse.send("LeaveHouse", "Slytherin ");
+    connectionHouse.send("LeaveHouse", "Slytherin");
     event.preventDefault();
 })
 
+trigger_gryffindor.addEventListener("click", function (event) {
+    connectionHouse.send("TriggerHouseNotify", "Gryffindor");
+    event.preventDefault();
+});
+
+trigger_hufflepuff.addEventListener("click", function (event) {
+    connectionHouse.send("TriggerHouseNotify", "Hufflepuff");
+    event.preventDefault();
+})
+
+trigger_ravenclaw.addEventListener("click", function (event) {
+    connectionHouse.send("TriggerHouseNotify", "Ravenclaw");
+    event.preventDefault();
+});
+
+trigger_slytherin.addEventListener("click", function (event) {
+    connectionHouse.send("TriggerHouseNotify", "Slytherin");
+    event.preventDefault();
+});
+
+connectionHouse.on("triggerHouseNotification", (houseName) => {
+    toastr.success(`A new notification for ${houseName} has been launched.`);
+});
+
+connectionHouse.on("newMemberAddedToHouse", (houseName) => {
+    toastr.success(`Member has sunscribed to ${houseName}`)
+});
+
+connectionHouse.on("newMemberRemovedFromHouse", (houseName) => {
+    toastr.warning(`Member has unsunscribed from ${houseName}`)
+});
+
+connectionHouse.on("subscriptionStatus", (strGroupsJoined, houseName, hasSubscribed) => {
+    lbl_houseJoined.innerText = strGroupsJoined;
+    if (hasSubscribed) {
+        // subscribe to
+
+        switch (houseName) {
+            case 'slytherin':
+                btn_slytherin.style.display = "none";
+                btn_un_slytherin.style.display = "";
+                break;
+            case 'gryffindor':
+                btn_gryffindor.style.display = "none";
+                btn_un_gryffindor.style.display = "";
+                break;
+            case 'hufflepuff':
+                btn_hufflepuff.style.display = "none";
+                btn_un_hufflepuff.style.display = "";
+                break;
+            case 'ravenclaw':
+                btn_ravenclaw.style.display = "none";
+                btn_un_ravenclaw.style.display = "";
+                break;
+        }
+
+        toastr.success(`You have subscribed successfully. ${houseName}`);
+    } else {
+        // unsubscribe
+        switch (houseName) {
+            case 'slytherin':
+                btn_slytherin.style.display = "";
+                btn_un_slytherin.style.display = "none";
+                break;
+            case 'gryffindor':
+                btn_gryffindor.style.display = "";
+                btn_un_gryffindor.style.display = "none";
+                break;
+            case 'hufflepuff':
+                btn_hufflepuff.style.display = "";
+                btn_un_hufflepuff.style.display = "none";
+                break;
+            case 'ravenclaw':
+                btn_ravenclaw.style.display = "";
+                btn_un_ravenclaw.style.display = "none";
+                break;
+        }
+
+        toastr.success(`You have unsubscribed successfully. ${houseName}`);
+    }
+});
 
 function rejected() {
     // rejected logs
