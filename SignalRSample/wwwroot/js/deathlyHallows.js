@@ -25,7 +25,6 @@ function fullfilled() {
     });
     // do something on start
     console.log("Connection to User Hub Successful");
-    newWindowLoadedOnClient();
 }
 
 function rejected() {
